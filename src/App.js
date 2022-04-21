@@ -30,6 +30,25 @@ function App() {
   useEffect(() => {
     if (data) {
       setLastData(data[Object.keys(data)[Object.keys(data).length - 1]]);
+      let tempDistance = [["Timestamp", "Distance"]];
+      for (const property in data) {
+        tempDistance.push([
+          new Date(property).toUTCString(),
+          data[property].distance,
+        ]);
+      }
+      console.log(tempDistance);
+      setDistanceChart(tempDistance);
+
+      let tempGas = [["Timestamp", "GasValue"]];
+      for (const property in data) {
+        tempGas.push([
+          new Date(property).toUTCString(),
+          data[property].gasValue,
+        ]);
+      }
+      console.log(tempGas);
+      setGasChart(tempGas);
     }
   }, [data]);
 
@@ -100,6 +119,7 @@ function App() {
           display: "flex",
           margin: "auto",
           justifyContent: "space-evenly",
+          marginBottom: "64px",
         }}
       >
         <div>
@@ -112,8 +132,13 @@ function App() {
             chartType="Line"
             width="100%"
             height="400px"
-            data={dummyData}
-            options={options}
+            data={distanceChart}
+            options={{
+              chart: {
+                title: "Grafik Tingkat Volume Tempat Sampah",
+                // subtitle: "in millions of dollars (USD)",
+              },
+            }}
           />
         </div>
         <div>
@@ -122,19 +147,20 @@ function App() {
           >
             Grafik Tingkat Bau Tempat Sampah
           </div>
+          <Chart
+            chartType="Line"
+            width="100%"
+            height="400px"
+            data={gasChart}
+            options={{
+              chart: {
+                title: "Grafik Tingkat Bau Tempat Sampah",
+                // subtitle: "in millions of dollars (USD)",
+              },
+            }}
+          />
         </div>
       </section>
-      {/* {console.log("data", data)} */}
-      {/* {Object.keys(data).map((item) => {
-        return (
-          <div keys={item.keys}>
-            {console.log("item", item, data[item].distance)}
-            <div>{item}</div>
-            <div>{data[item].distance}</div>
-            <div>{data[item].gasValue}</div>
-          </div>
-        );
-      })} */}
       <section
         id={"footer"}
         style={{
@@ -154,13 +180,6 @@ function App() {
     </div>
   );
 }
-
-export const options = {
-  chart: {
-    title: "Box Office Earnings in First Two Weeks of Opening",
-    subtitle: "in millions of dollars (USD)",
-  },
-};
 
 export const dummyData = [
   [
