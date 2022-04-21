@@ -3,10 +3,13 @@ import "./App.css";
 import { db } from "./firebase";
 import { getDatabase, ref, get, child } from "firebase/database";
 import { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
 
 function App() {
   const [data, setData] = useState([]);
   const [lastData, setLastData] = useState();
+  const [distanceChart, setDistanceChart] = useState();
+  const [gasChart, setGasChart] = useState();
 
   useEffect(() => {
     const dbRef = ref(db);
@@ -25,8 +28,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (data)
+    if (data) {
       setLastData(data[Object.keys(data)[Object.keys(data).length - 1]]);
+    }
   }, [data]);
 
   return (
@@ -61,7 +65,8 @@ function App() {
         </div>
         <div
           style={{
-            backgroundColor: lastData ?? lastData.distance > 400 ? "#DB9090" : "#A2D05C",
+            backgroundColor:
+              !lastData ?? lastData.distance > 400 ? "#DB9090" : "#A2D05C",
             borderRadius: "10px",
             padding: "16px",
             width: "120px",
@@ -71,11 +76,12 @@ function App() {
             fontWeight: "500",
           }}
         >
-          {lastData ?? lastData.distance < 50 ? "Penuh" : "Tidak Penuh"}
+          {!lastData ?? lastData.distance < 50 ? "Penuh" : "Tidak Penuh"}
         </div>
         <div
           style={{
-            backgroundColor: lastData ?? lastData.gasValue > 400 ? "#DB9090" : "#A2D05C",
+            backgroundColor:
+              !lastData ?? lastData.gasValue > 400 ? "#DB9090" : "#A2D05C",
             borderRadius: "10px",
             padding: "16px",
             width: "120px",
@@ -85,7 +91,7 @@ function App() {
             fontWeight: "500",
           }}
         >
-          {lastData ?? lastData.gasValue > 400 ? "Bau" : "Tidak Bau"}
+          {!lastData ?? lastData.gasValue > 400 ? "Bau" : "Tidak Bau"}
         </div>
       </section>
       <section
@@ -122,6 +128,22 @@ function App() {
           </div>
         );
       })} */}
+      <section
+        id={"footer"}
+        style={{
+          backgroundColor: "#464F6C",
+          color: "#FFFFFF",
+          fontSize: "20px",
+          fontWeight: "bold",
+          padding: "20px",
+        }}
+      >
+        2022 © Kelompok 5 Rekayasa Sistem dan Teknologi Informasi
+        <div style={{ fontWeight: "100" }}>
+          Fabhian 18219055 | Nadya 18219071 | Graciella 18219075 | Kemal
+          18219091 | Tugus 18219117
+        </div>
+      </section>
     </div>
   );
 }
