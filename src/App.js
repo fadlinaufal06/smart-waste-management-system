@@ -52,6 +52,32 @@ function App() {
     }
   }, [data]);
 
+  const hasWindow = typeof window !== "undefined";
+
+  function getWindowDimensions() {
+    const width = hasWindow ? window.innerWidth : null;
+    const height = hasWindow ? window.innerHeight : null;
+    return {
+      width,
+      height,
+    };
+  }
+
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  useEffect(() => {
+    if (hasWindow) {
+      function handleResize() {
+        setWindowDimensions(getWindowDimensions());
+      }
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, [hasWindow]);
+
   return (
     <div className="App">
       <section
@@ -71,7 +97,7 @@ function App() {
         style={{
           backgroundColor: "rgba(242, 247, 212, 1)",
           filter: "drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25))",
-          maxWidth: "30vw",
+          maxWidth: windowDimensions.width < 600 ? "50vw" : "30vw",
           margin: "auto",
           marginTop: "32px",
           marginBottom: "32px",
@@ -116,20 +142,20 @@ function App() {
       <section
         id={"Grafik"}
         style={{
-          display: "flex",
+          display: windowDimensions.width < 600 ? "block" : "flex",
           margin: "auto",
           justifyContent: "space-evenly",
           marginBottom: "64px",
         }}
       >
-        <div>
+        <div style={{ margin: "30px" }}>
           <div
             style={{ color: "#464F6C", fontSize: "24px", fontWeight: "500" }}
           >
             Grafik Tingkat Volume Tempat Sampah
           </div>
           <Chart
-            chartType="Line"
+            chartType="LineChart"
             width="100%"
             height="400px"
             data={distanceChart}
@@ -138,17 +164,18 @@ function App() {
                 title: "Grafik Tingkat Volume Tempat Sampah",
                 // subtitle: "in millions of dollars (USD)",
               },
+              legend: { position: "bottom" },
             }}
           />
         </div>
-        <div>
+        <div style={{ margin: "30px" }}>
           <div
             style={{ color: "#464F6C", fontSize: "24px", fontWeight: "500" }}
           >
             Grafik Tingkat Bau Tempat Sampah
           </div>
           <Chart
-            chartType="Line"
+            chartType="LineChart"
             width="100%"
             height="400px"
             data={gasChart}
@@ -157,6 +184,7 @@ function App() {
                 title: "Grafik Tingkat Bau Tempat Sampah",
                 // subtitle: "in millions of dollars (USD)",
               },
+              legend: { position: "bottom" },
             }}
           />
         </div>
@@ -180,28 +208,5 @@ function App() {
     </div>
   );
 }
-
-export const dummyData = [
-  [
-    "Day",
-    "Guardians of the Galaxy",
-    "The Avengers",
-    "Transformers: Age of Extinction",
-  ],
-  [1, 37.8, 80.8, 41.8],
-  [2, 30.9, 69.5, 32.4],
-  [3, 25.4, 57, 25.7],
-  [4, 11.7, 18.8, 10.5],
-  [5, 11.9, 17.6, 10.4],
-  [6, 8.8, 13.6, 7.7],
-  [7, 7.6, 12.3, 9.6],
-  [8, 12.3, 29.2, 10.6],
-  [9, 16.9, 42.9, 14.8],
-  [10, 12.8, 30.9, 11.6],
-  [11, 5.3, 7.9, 4.7],
-  [12, 6.6, 8.4, 5.2],
-  [13, 4.8, 6.3, 3.6],
-  [14, 4.2, 6.2, 3.4],
-];
 
 export default App;
