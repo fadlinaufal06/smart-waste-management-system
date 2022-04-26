@@ -33,7 +33,7 @@ function App() {
       let tempDistance = [["Timestamp", "Distance"]];
       for (const property in data) {
         tempDistance.push([
-          new Date(property).toUTCString(),
+          property,
           data[property].distance,
         ]);
       }
@@ -43,7 +43,7 @@ function App() {
       let tempGas = [["Timestamp", "GasValue"]];
       for (const property in data) {
         tempGas.push([
-          new Date(property).toUTCString(),
+          property,
           data[property].gasValue,
         ]);
       }
