@@ -110,7 +110,7 @@ function App() {
         <div
           style={{
             backgroundColor:
-              lastData && lastData.distance > 400 ? "#DB9090" : "#A2D05C",
+              lastData && lastData.distance < 50 ? "#DB9090" : "#A2D05C",
             borderRadius: "10px",
             padding: "16px",
             width: "120px",
