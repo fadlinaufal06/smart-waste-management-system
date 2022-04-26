@@ -30,6 +30,7 @@ function App() {
   useEffect(() => {
     if (data) {
       setLastData(data[Object.keys(data)[Object.keys(data).length - 1]]);
+      console.log(lastData)
       let tempDistance = [["Timestamp", "Distance"]];
       for (const property in data) {
         tempDistance.push([
@@ -37,7 +38,6 @@ function App() {
           data[property].distance,
         ]);
       }
-      console.log(tempDistance);
       setDistanceChart(tempDistance);
 
       let tempGas = [["Timestamp", "GasValue"]];
@@ -47,7 +47,6 @@ function App() {
           data[property].gasValue,
         ]);
       }
-      console.log(tempGas);
       setGasChart(tempGas);
     }
   }, [data]);
@@ -111,7 +110,7 @@ function App() {
         <div
           style={{
             backgroundColor:
-              !lastData ?? lastData.distance > 400 ? "#DB9090" : "#A2D05C",
+              lastData ?? lastData.distance > 400 ? "#DB9090" : "#A2D05C",
             borderRadius: "10px",
             padding: "16px",
             width: "120px",
@@ -121,12 +120,12 @@ function App() {
             fontWeight: "500",
           }}
         >
-          {!lastData ?? lastData.distance < 50 ? "Penuh" : "Tidak Penuh"}
+          {lastData ?? lastData.distance < 50 ? "Penuh" : "Tidak Penuh"}
         </div>
         <div
           style={{
             backgroundColor:
-              !lastData ?? lastData.gasValue > 400 ? "#DB9090" : "#A2D05C",
+              lastData ?? lastData.gasValue > 400 ? "#DB9090" : "#A2D05C",
             borderRadius: "10px",
             padding: "16px",
             width: "120px",
@@ -136,7 +135,7 @@ function App() {
             fontWeight: "500",
           }}
         >
-          {!lastData ?? lastData.gasValue > 400 ? "Bau" : "Tidak Bau"}
+          {lastData ?? lastData.gasValue > 400 ? "Bau" : "Tidak Bau"}
         </div>
       </section>
       <section
