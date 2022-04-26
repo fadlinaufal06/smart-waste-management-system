@@ -30,26 +30,31 @@ function App() {
   useEffect(() => {
     if (data) {
       setLastData(data[Object.keys(data)[Object.keys(data).length - 1]]);
-      console.log(lastData)
+      console.log(lastData);
       let tempDistance = [["Timestamp", "Distance"]];
       for (const property in data) {
-        tempDistance.push([
-          property,
-          data[property].distance,
-        ]);
+        tempDistance.push([property, data[property].distance]);
       }
       setDistanceChart(tempDistance);
 
       let tempGas = [["Timestamp", "GasValue"]];
       for (const property in data) {
-        tempGas.push([
-          property,
-          data[property].gasValue,
-        ]);
+        tempGas.push([property, data[property].gasValue]);
       }
       setGasChart(tempGas);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (lastData) {
+      if (lastData.distance < 10) {
+        alert("Tong sampah sudah penuh");
+      }
+      if (lastData.gasValue > 600) {
+        alert("Tong sampah sudah bau");
+      }
+    }
+  }, [lastData]);
 
   const hasWindow = typeof window !== "undefined";
 
