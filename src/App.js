@@ -203,10 +203,9 @@ function App() {
           padding: "20px",
         }}
       >
-        2022 © Kelompok 5 Rekayasa Sistem dan Teknologi Informasi
+        2022 © Kelompok 10 Internet of Things
         <div style={{ fontWeight: "100" }}>
-          Fabhian 18219055 | Nadya 18219071 | Graciella 18219075 | Kemal
-          18219091 | Tugus 18219117
+          Fadli 18219043 | Kevin 18219050 | Fabhian 18219055
         </div>
       </section>
     </div>

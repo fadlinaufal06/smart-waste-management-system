@@ -2,14 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD3O6vqQjX0vkNe6Z22g7zyBYcnjTOfCUE",
-  authDomain: "swms-reksti.firebaseapp.com",
-  databaseURL:
-    "https://swms-reksti-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "swms-reksti",
-  storageBucket: "swms-reksti.appspot.com",
-  messagingSenderId: "167398741624",
-  appId: "1:167398741624:web:b83c2f09549609e3f7ff8d",
+  apiKey: "AIzaSyDq0OEPAxPBPh1mBuC_evqOJ-q8L0an2KM",
+  authDomain: "swms-3c669.firebaseapp.com",
+  databaseURL: "https://swms-3c669-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "swms-3c669",
+  storageBucket: "swms-3c669.appspot.com",
+  messagingSenderId: "120653094187",
+  appId: "1:120653094187:web:69b147baac87b45e35796e",
+  measurementId: "G-X7FETJK1T7"
 };
 
 // Initialize Firebase and Firestore
